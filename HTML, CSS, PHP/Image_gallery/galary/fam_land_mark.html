@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Famous Landmark Image Gallary</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body style="background-color: bisque;">
+        <div class="row">
+            <div class="column">
+                <div>
+                    <button  class='btn'style="width: 48%;" onclick="disp_home()">Home</button>
+                    <button  class='btn'style="width: 48%;" onclick="disp_sum()">Summary</button>
+                </div>
+                <hr style="border: 1px solid red;">
+                <center style="margin-top: 30px;" id="home" style="display: contents;">
+                    <img id="fimg" src="./img/fam_land/fam_land_1.jpg" width="500px" height="300px">
+                    <div style="margin-top:20px;">
+                        <button  class='btn'onclick="loadPreImg()">Back</button>
+                        <button  class='btn'onclick="loadNextImg()">Next</button>
+                    </div>
+                </center>
+                <center id='tbl' style="display: none;">
+                    <table id="tbl">
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mount Fuji</td>
+                            <td>Honshu Island</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Golden Gate Bridge</td>
+                            <td>San Francisco [USA]</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Eiffel Tower</td>
+                            <td>Paris [France]</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Kremlin Wall</td>
+                            <td>Moscow [Russia]</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Leaning Tower</td>
+                            <td>Pisa [Italy]</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Moai on Easter Island</td>
+                            <td>Chile</td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+            <div class="column1">
+                <center>
+                    <h2>Information</h2>
+                    <div id="info"></div>
+                </center>
+            </div>
+        </div>
+    </body>
+    <script>
+        let ind = 1;
+        let max_img_cnt = 6;
+        let info = [
+            "<h3>Mount Fuji, Honshu Island, [Japan]</h3><br>Japan’s Mt. Fuji is an active volcano about 100 kilometers southwest of Tokyo. Commonly called “Fuji-san,” it’s the country’s tallest peak, at 3,776 meters. A pilgrimage site for centuries, it’s considered one of Japan’s 3 sacred mountains, and summit hikes remain a popular activity. Its iconic profile is the subject of numerous works of art, notably Edo Period prints by Hokusai and Hiroshige.",
+            "<h3>Golden Gate Bridge, San Francisco [USA]</h3><br>The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the one-mile-wide (1.6 km) strait connecting San Francisco Bay and the Pacific Ocean. The structure links the U.S. city of San Francisco, California—the northern tip of the San Francisco Peninsula—to Marin County, carrying both U.S. Route 101 and California State Route 1 across the strait. The bridge is one of the most internationally recognized symbols of San Francisco and California. It was initially designed by engineer Joseph Strauss in 1917. It has been declared one of the Wonders of the Modern World by the American Society of Civil Engineers.",
+            "<h3>Eiffel Tower, Paris [France]</h3><br><p>The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower.Locally nicknamed \"La dame de fer\" (French for \"Iron Lady\"), it was constructed from 1887 to 1889 as the entrance to the 1889 World's Fair and was initially criticised by some of France's leading artists and intellectuals for its design, but it has become a global cultural icon of France and one of the most recognisable structures in the world.[3] The Eiffel Tower is the most-visited paid monument in the world; 6.91 million people ascended it in 2015.</p><p>The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris.</p>",
+            "<h3>Kremlin Wall, Moscow [Russia]</h3><br><p>The Grand Kremlin Palace is part of the Kremlin complex and is located next to the Red Square and St Basil’s Cathedral in Russia’s capital city Moscow. </p><p>The Kremlin is a fortress with enclosing walls and is built along the Moskva River. The name ‘Kremlin’ means ‘fortress within a city’. The more than 500-year-old Kremlin includes the wall with its 20 towers as well as four churches and five palaces within the walls. </p><p>The Kremlin was once the residence of the Tzars. Today, it is where the Russian president resides. The Cathedral of Vasily the Blessed, usually referred to as Saint Basil’s Cathedral, is easily recognised due to its nine brightly coloured onion domes.</p>",
+            "<h3>Leaning Tower, Pisa [Italy]</h3><br><p>The Leaning Tower of Pisa is one of Italy’s major tourist attractions. The freestanding bell tower of the Pisa Cathedral was built over almost two hundred years and was finished in 1399.</p><p>The original hight of the tower was 60 meters/196ft, but as it is leaning, the lowest side is now less than 56 meters/184ft. The construction already caused many problems as the soil was soft, sandy and unstable. Already during construction, the builders tried to balance the leaning side with more columns on the other side, but the tower still leaned - like many other buildings in the area.You can walk up the 251 stairs to the viewing platform at the top of the tower which is quite an amazing experience. </p>",
+            "<h3>Moai on Easter Island, Chile</h3><br><p>The Moai are huge statues on the Polynesian island Rapa Nui. The island is commonly called Easter Island and belongs to Chile. The Easter Island is more than 2,200 miles away from Chile in the middle of the Pacific Ocean.<p><p>The islanders created more than 900 carved stone figures between 1250 and 1500. Most of the stone figures with the oversized heads were built with tuff stone and compressed volcanic ash.</p><p>The figures weigh on average 14 tons which is as much as two elephants! However, the size of the statues varies, there are some smaller ones and some much bigger ones too. The heaviest stone figure weights 82 tons and is 10 metres /33ft long! They are about 4metres/13ft tall. Most of the islanders believe the huge stone statues represent their ancestors.There are more than 900 monumental statues and 300 ceremonial platforms which are sacred to the Rapa Nui people.</p>"
+        ]
+        function loadNextImg(){
+            ind += 1;
+            document.getElementById("fimg").src = "./img/fam_land/fam_land_"+ind+".jpg"
+            document.getElementById("info").innerHTML = info[ind-1];
+            if(ind >= max_img_cnt)
+                ind = 0;
+        }
+        function loadPreImg(){
+            ind -= 1;
+            if(ind <= 0)
+                ind = max_img_cnt
+                document.getElementById("fimg").src = "./img/fam_land/fam_land_"+ind+".jpg"
+            document.getElementById("info").innerHTML = info[ind-1];
+        }
+        function disp_home(){
+            document.getElementById("home").style.display = "block";
+            document.getElementById("tbl").style.display = "none";
+        }
+        function disp_sum(){
+            document.getElementById("home").style.display  = "none";
+            document.getElementById("tbl").style.display  = "block";
+        }
+        document.getElementById("info").innerHTML = info[0];
+        
+    </script>
+</html>

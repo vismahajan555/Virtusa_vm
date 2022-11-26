@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>Fort Image Gallary</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body style="background-color: bisque;">
+        <div class="row">
+            <div class="column">
+                <div>
+                    <button  class='btn'style="width: 48%;" onclick="disp_home()">Home</button>
+                    <button  class='btn'style="width: 48%;" onclick="disp_sum()">Summary</button>
+                </div>
+                <hr style="border: 1px solid red;">
+                <center style="margin-top: 30px;" id="home" style="display: contents;">
+                    <img id="fimg" src="./img/forts/fort_1.png" width="500px" height="300px">
+                    <div style="margin-top:20px;">
+                        <button  class='btn'onclick="loadPreImg()">Back</button>
+                        <button  class='btn'onclick="loadNextImg()">Next</button>
+                    </div>
+                </center>
+                <center id='tbl' style="display: none;">
+                    <table>
+                        <tr>
+                            <th>Sr No.</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Red Fort</td>
+                            <td>Delhi</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jhansi Fort</td>
+                            <td>Jhansi</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Junagarh Fort</td>
+                            <td>Bikaner</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Mehrangarh Fort</td>
+                            <td>Rajasthan</td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+            <div class="column1">
+                <center>
+                    <h2>Information</h2>
+                    <div id="info"></div>
+                </center>
+            </div>
+        </div>
+    </body>
+    <script>
+        let ind = 1;
+        let max_img_cnt = 4;
+        let info = ["<h3>Red Fort</h3>Red Fort legitimately tops the list of 10 great forts in India with the fact that this fort has seen Delhi from the time it was Mughal’s capital to the day it became the capital of world’s largest democracy. Red Fort was built in the 17th century by the mighty Mughal ruler – Shah Jahan. Its construction started on 12th May 1638 on the order of Shah Jahan when he decided to change his capital from Agra to Delhi. Thick walls of Red Fort made up of Red sandstone has protected Mughal dynasty for almost 200 years from their enemies. When you go inside this mesmerising fort, you can see a mosque called Moti Masjid, Diwan-i-Azam and many other structures within the walls of Red Fort Complex. It is located in the original part of Delhi – PuraniDilli. Whenever you visit Red Fort in Delhi, make sure you roam around the vibrant streets of Chandini Chowk for some lip-smacking chaat.",
+        "<h3>Jhansi Fort</h3>We know, just by reading the name of Jhansi who came to your mind. You guessed right. This is the fort in which brave queen of Jhansi – Rani Laxmi Bai used to live. Her legends are known to every single child in Jhansi that how she fought for her dignity and for her motherland. This fort is crowned on the hilltop of Bangura and adds up to the beauty of this city. Jhansi Fort is built with an amalgamation of Bundela style and Maratha style of architecture. Its granite walls are around 20 feet thick. Best time to visit Jhansi Fort is in January and February when Jhansi Mahotsav is organised by the authorities and local artists come to perform in the fort. Beauty and legends of Jhansi Fort are the true pride of India.",
+        "<h3>Junagarh Fort</h3>Junagarh Fort is a place which can woo you with its beauty and will keep you overwhelmed for the rest of your life. It is one of the great forts in Rajasthan which coax so many tourists to its mesmerising and gigantic views. Bikaner city has grown around this great fort with time and it is one of the few forts in Rajasthan which is not built on a hilltop. Junagarh Fort is just around 5-6 hours ride away from the spectacular Thar Desert. So, if you are planning your next trip to this fort, mind it that best time to visit Junagarh Fort is between October and February when the entire city cools down for a few months.",
+        "<h3>Mehrangarh Fort</h3>Rajasthan, literally means Raja ka Sthan (Place of King), has most of the mighty forts in India. One of the greatest forts in India is Mehrangarh Fort which is beaded on the land of Jodhpur. Mehrangarh Fort is one of the biggest forts in India. Quintessential beauty of this fort coaxes travellers as well as the big movies industries like Bollywood and Hollywood to it. Several movies are being shot in the Mehrangarh Fort premises including Holiday, Hum Sath Sath Hai, The Dark Knight Rises and many more. If history and chronicles interest you, Mehrangarh Fort Museum is where you should head to for some really interesting paintings, costumes and ammunitions belonging to old age.",
+        "FORT 5 INFO"]
+        function loadNextImg(){
+            ind += 1;
+            document.getElementById("fimg").src = "./img/forts/fort_"+ind+".png"
+            document.getElementById("info").innerHTML = info[ind-1];
+            if(ind >= max_img_cnt)
+                ind = 0;
+        }
+        function loadPreImg(){
+            ind -= 1;
+            if(ind <= 0)
+                ind = max_img_cnt
+            document.getElementById("fimg").src = "./img/forts/fort_"+ind+".png"
+            document.getElementById("info").innerHTML = info[ind-1];
+        }
+        function disp_home(){
+            document.getElementById("home").style.display = "block";
+            document.getElementById("tbl").style.display = "none";
+        }
+        function disp_sum(){
+            document.getElementById("home").style.display  = "none";
+            document.getElementById("tbl").style.display  = "block";
+        }
+        document.getElementById("info").innerHTML = info[0];
+        
+    </script>
+</html>
