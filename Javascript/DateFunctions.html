@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<script type="text/javascript">
+			function dateFun()
+			{
+				var d=new Date();
+				document.write("Date is : "+d+"</br>");
+				document.write("Day : "+d.getDay()+"</br>");
+				document.write("Full Year : "+d.getFullYear()+"</br>");
+				document.write("Month : "+d.getMonth()+"</br>");
+				document.write("Hours : "+d.getHours()+"</br>");
+				document.write("Minutes : "+d.getMinutes()+"</br>");
+				document.write("Seconds : "+d.getSeconds()+"</br>");
+				document.write("MilliSeconds : "+d.getMilliseconds()+"</br>");
+			}
+		</script>
+		<form>
+			<input type="button" value="Click Me" onClick="dateFun()">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+	<body>
+		<script type="text/javascript">
+			function register()
+			{
+				//alert("Hello");
+				var fn,ln,en,r,cl,dv;
+				fn=document.Form1.fname.value;
+				ln=document.Form1.lname.value;
+				en=document.Form1.enroll.value;
+				r=document.Form1.roll.value;
+				cl=document.Form1.cl.value;
+				dv=document.Form1.d.value;
+				
+				if(fn=="" || ln=="" || en=="" || r=="" || cl=="" || dv=="")
+					alert("Please fill all the fields");
+				else
+				{
+					if(en.length<10 || en.length>10)
+						alert("Enter valid Enrollmet No.");
+					else
+						document.write("Registration Successfull "+fn+" "+ln);
+				}
+		
+			}
+		</script>
+		<form name="Form1">
+		  <center>
+			<h1><font color="Red">Student Registration</font></h1>
+			<table>
+			<tr>
+			<td>First Name :</td><td><input type="text" id="fname"/></td>
+			</tr>
+			<tr>
+			<td>last Name :</td><td><input type="text" id="lname"/></td>
+			</tr>
+			<tr>
+			<td>Enrollment No. :</td><td><input type="text" id="enroll"/></td>
+			</tr>
+			<tr>
+			<td>Roll No. :</td><td><input type="number" min="1" max="65" id="roll"/></td>
+			</tr>
+			<tr>
+			<td>Class_ :</td><td><input type="text" id="cl"/></td>
+			</tr>
+			<tr>
+			<td>Division :</td><td><input type="text" id="d"/></td>
+			</tr>
+			<tr>
+			<td colspan="2" align="center"><input type="button" value="Submit" onClick="register()"/></td>
+			</tr>
+			</table>
+		  </center>
+		</form>
+	</body>
+</html>
+			

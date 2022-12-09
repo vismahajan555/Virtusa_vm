@@ -1,0 +1,30 @@
+<html>
+	<body>
+		<script type="text/javascript">
+			function vowels()
+			{
+				var count=0;
+				var str=document.form1.str.value;
+				if(str=="")
+					alert("Please Enter Your Name");
+				else
+				{
+					for(i=0;i<str.length;i++)
+					{
+						if(str[i]=="a" || str[i]=="e" || str[i]=="i" || str[i]=="o" || str[i]=="u" ||
+ 						   str[i]=="A" || str[i]=="E" || str[i]=="I" || str[i]=="O" || str[i]=="U")
+							count++;					
+					}
+					document.write("There are "+count+" vowels is "+str);
+				}
+			}
+		</script>
+		<form name="form1">
+			<center>
+			Name : <input type="text" id="str"></br>
+			<input type="button" value="Click me" onClick="vowels()">
+			</center>
+		</form>
+	</body>
+</html>
+		

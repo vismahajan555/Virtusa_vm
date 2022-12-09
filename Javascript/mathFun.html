@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arithmetic operations</title>
+</head>
+<body>
+	<form name="myform">
+		First No. <input type="text" id="n1"><br>
+		Second No. <input type="text" id="n2"><br>
+		<input type="button" value="Calculate" onCLick="calc()"><br>
+		Addition <input type="text" id="add"><br>
+		Substraction <input type="text" id="sub"><br>
+		Multiplication <input type="text" id="mul"><br>
+		Division <input type="text" id="div"><br>
+		Remainder <input type="text" id="mod">
+	</form>
+	<script type="text/javascript">
+		function calc()
+		{
+			var a=parseInt(document.myform.n1.value);
+			var b=parseInt(document.myform.n2.value);
+			document.getElementById("add").value=a+b;
+			document.getElementById("sub").value=a-b;
+			document.getElementById("mul").value=a*b;
+			document.getElementById("div").value=a/b;
+			document.getElementById("mod").value=a%b;
+		}
+	</script>
+
+</body>
+</html>
