@@ -1,0 +1,109 @@
+>>>>>>>>>>>>>>>>>>>>>>RAILWAY RESERVATION SYSTEM<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>>>>>>>>CREATE TABLE<<<<<<<<<<<<<<<<<<<<
+
+create table train_details(train_name char(15) primary key,total_seats number(3),reserved_seats number(3));
+
+create table reservation_status(train_name char(15) references train_details(train_name),seat_id number(3),reserved char(2) check (reserved in('y','n')),customer_name char(15));
+
+create table waiting_list(slno number(3),customer_name char(15) primary key,train_name char(15) references train_details(train_name));
+
+
+
+>>>>>>>>>>>>>>>>>>>>ENTER TRAIN DETAILS<<<<<<<<<<<<<<<<<<<<
+
+ 
+
+declare
+    tname char(15);
+    tot number(3);
+    resv number(3);
+    cursor cur is select * from train_details;
+begin
+    insert into train_details values(:train_name,:total_seats,0);
+    open cur;
+    loop
+      fetch cur into tname,tot,resv;
+        if cur%found then
+          for i in 1..tot loop
+            insert into reservation_status values(tname,i,'n',null);
+          end loop;
+        else
+          exit;
+        end if;
+     end loop;
+     commit;
+     close cur;
+end;
+
+select * from train_details
+select * from reservation_status
+
+
+
+>>>>>>>>>>>>>>>>>>>>RESERVE A SEAT<<<<<<<<<<<<<<<<<<<<
+
+ 
+
+declare
+    cname char(15);
+    tname char(15);
+    tot number(3);
+    resv number(3);
+    sid number(3);
+    sno number(3);
+    sl number(3);
+begin
+    cname:=:cname;
+    tname:=:tname;
+    select total_seats into tot from train_details where train_name=tname;
+    select reserved_seats into resv from train_details where train_name=tname;
+    if tot>resv then
+      select MIN(seat_id) into sid from reservation_status where train_name=tname and reserved='n';
+      update reservation_status set reserved='y' where train_name=tname and seat_id=sid;
+      update reservation_status set customer_name=cname where train_name=tname and seat_id=sid;
+      update train_details set reserved_seats=reserved_seats+1 where train_name=tname;
+    else
+      select MAX(slno) into sno from waiting_list;
+      if sno is null then
+        sl:=1;
+      else
+        sl:=sno+1;
+      end if;
+      insert into waiting_list values(sl,cname,tname);
+    end if;
+end;
+
+select * from reservation_status 
+select * from waiting_list
+
+
+
+>>>>>>>>>>>>>>>>>>>>CANCEL A RESERVATION<<<<<<<<<<<<<<<<<<<<
+
+declare
+    cname char(15);
+    tname char(15);
+    sid number(3);
+    sno number(3);
+    sl number(3);
+begin
+    cname:=:cname;
+    tname:=:tname;
+    select seat_id into sid from reservation_status where train_name=tname and customer_name=cname;
+    select MIN(slno) into sno from waiting_list where train_name=tname;
+    if sno is not null then
+      select customer_name into cname from waiting_list where train_name=tname and slno=sno;
+      update reservation_status set customer_name=cname where train_name=tname and seat_id=sid;
+      delete from waiting_list where train_name=tname and slno=sno;
+    else
+      update reservation_status set reserved='n' where train_name=tname and seat_id=sid;
+      update reservation_status set customer_name=null where train_name=tname and seat_id=sid;
+      update train_details set reserved_seats=reserved_seats-1 where train_name=tname;
+    end if;
+end;
+
+select * from waiting_list
+select * from reservation_status
+select * from train_details
