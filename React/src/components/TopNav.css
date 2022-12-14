@@ -1,0 +1,11 @@
+.box{
+    height: 50px;
+    background-color: cadetblue;
+    color: white;
+}
+
+.heading{
+    padding-left: 20px;
+    font-size: 20pt;
+    padding-top: 5px;
+}
